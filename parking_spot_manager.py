@@ -43,6 +43,50 @@ def str_list_to_class_list(str_list):
         classlist.append(ps)
     return classlist
 
+#필터함수 filter_by_name, filter_by_city, filter_by_district, filter_by_ptype.
+#키 값에 대응하는 문자열 내부에 해당 키워드가 있는지 판단하는 로직하에 수행. (substring 파악)
+def filter_by_name(spots, name):
+    retlist = list()
+    for spot in spots:
+        if name in spot.get('name'):
+            retlist.append(spot)
+    return retlist
+def filter_by_city(spots, city):
+    retlist = list()
+    for spot in spots:
+        if city in spot.get('city'):
+            retlist.append(spot)
+    return retlist
+def filter_by_district(spots, district):
+    retlist = list()
+    for spot in spots:
+        if district in spot.get('district'):
+            retlist.append(spot)
+    return retlist
+def filter_by_ptype(spots, ptype):
+    retlist = list()
+    for spot in spots:
+        if ptype in spot.get('ptype'):
+            retlist.append(spot)
+    return retlist
+#Filter by location = 2차원으로 구성된 튜플로 가져온 값에 대한 검증을 진행한 뒤 추가하는 구조.
+def filter_by_location(spots, locations):
+    retlist = list()
+
+    for spot in spots:
+        latitude = float(spot.get('latitude'))
+        longitude = float(spot.get('longitude'))
+        #Latitude에 대한 검증 시 실패하였을 경우에는 continue
+        if not locations[0][0] < latitude < locations[0][1] :
+            continue
+        #Longitude에 대한 검증 시 실패하였을 경우 continue
+        if not locations[1][0] < longitude < locations[1][1] :
+            continue
+
+        #해당 구문이 실행되는 경우는 오로지 상위 두 조건을 통과하였을 시에만 실행되게 하였음.
+        retlist.append(spot)
+    return retlist
+
 
 # 각 단계별로 테스트 (테스트할때 주석해제 후 사용)
 if __name__ == '__main__':

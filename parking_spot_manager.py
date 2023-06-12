@@ -87,6 +87,13 @@ def filter_by_location(spots, locations):
         retlist.append(spot)
     return retlist
 
+#Sort by keyword 넣은 키워드에 대응하여 정렬하는 기능 추가
+def sort_by_keyword(spots, keyword) :
+    #파이썬 라이브러리 sorted 사용, lambda에는 정렬 기준을 따로 두었음.
+    #리스트를 정렬하는 것이기 때문에 리스트의 단위가 되는 자료형은 dict가 들어가므로 key값에 대응한 값을 기준으로 정렬하는 것이 일반적임.
+    #따라서 다으모가 같이 람다를 구성함.
+    retlist = sorted(spots, key=lambda x: x.get(keyword), reverse= False)
+    return retlist
 
 # 각 단계별로 테스트 (테스트할때 주석해제 후 사용)
 if __name__ == '__main__':
@@ -102,5 +109,5 @@ if __name__ == '__main__':
     # print_spots(spots)
 
     # version#4
-    # spots = sort_by_keyword(spots, 'name')
-    # print_spots(spots)
+    #spots = sort_by_keyword(spots, 'name')
+    #print_spots(spots)

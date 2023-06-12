@@ -3,7 +3,7 @@ import file_manager
 import parking_spot_manager
 def start_process(path):
     # 효율적인 코드 고려, 파일 리딩시, 최초에 한해서 읽게 만든다.
-    str_list = file_manager.read_file("./input/free_parking_spot.csv")
+    str_list = file_manager.read_file("./input/free_parking_spot_seoul.csv")
     # Modify가 필요한 경우 특정 구문 내의 지역 변수가 아닌, 함수 자체 내의 지역 변수로 변경이 필요 하기에 다음과 같이 변경
     spots = parking_spot_manager.str_list_to_class_list(str_list)
     while True:
@@ -65,7 +65,8 @@ def start_process(path):
             print(keywords)
             keyword = input('type keyword:')
             if keyword in keywords:
-                print("not implemented yet")
+                #원하는 키워드에 맞는 소팅작업 가능
+                spots = parking_spot_manager.sort_by_keyword(spots, keyword)
                 # fill this block
             else: print("invalid input")
         elif select == 4:

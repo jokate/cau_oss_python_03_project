@@ -1,4 +1,9 @@
+#각 기능에 필요한 모듈 선제적 전처리로 받아오기.
+import file_manager
+import parking_spot_manager
 def start_process(path):
+    # 효율적인 코드 고려, 파일 리딩시, 최초에 한해서만 읽게 만든다.
+    str_list = file_manager.read_file("./input/free_parking_spot_seoul.csv")
     while True:
         print("---menu---")
         print("[1] print")
@@ -7,8 +12,11 @@ def start_process(path):
         print("[4] exit")
         select = int(input('type:'))
         if select == 1:
-            print("not implemented yet")
-            # fill this block
+            #리스트를 클래스 리스트로 변경 후
+            spots = parking_spot_manager.str_list_to_class_list(str_list)
+            #해당 클래스에 관한 정보를 출력한다.
+            parking_spot_manager.print_spots(spots)
+
         elif select == 2:
             print("---filter by---")
             print("[1] name")
@@ -52,7 +60,8 @@ def start_process(path):
                 # fill this block
             else: print("invalid input")
         elif select == 4:
-            print("not implemented yet")
+            print("Exit")
+            exit(0)
             # fill this block
         else:
             print("invalid input")
